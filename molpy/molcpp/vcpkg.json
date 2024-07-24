@@ -1,0 +1,9 @@
+{
+    "dependencies": [
+      "igraph",
+      "xtensor",
+      "xtensor-blas",
+      "lapack-reference"
+    ]
+  }
+  

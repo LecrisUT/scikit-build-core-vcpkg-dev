@@ -1,0 +1,110 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 22,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "cmake-base",
+        "generator": "Ninja",
+        "cacheVariables": {
+          "CMAKE_CXX_EXTENSIONS": "OFF",
+          "CMAKE_CXX_STANDARD": "20",
+          "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+          "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        }
+      },
+      {
+        "name": "cmake-pedantic",
+        "hidden": true,
+        "inherits": "cmake-base",
+        "warnings": {
+          "dev": false,
+          "deprecated": true,
+          "uninitialized": true,
+          "unusedCli": true,
+          "systemVars": false
+        },
+        "errors": {
+          "dev": false,
+          "deprecated": true
+        }
+      },
+      {
+        "name": "dev-base",
+        "hidden": true,
+        "inherits": ["cmake-base", "cmake-pedantic"],
+        "cacheVariables": {
+          "molcpp_DEVELOPER_MODE": "ON"
+        }
+      },
+      {
+        "name": "release-base",
+        "hidden": true,
+        "inherits": ["cmake-base", "cmake-pedantic"],
+        "cacheVariables": {
+          "molcpp_DEVELOPER_MODE": "OFF"
+        }
+      },
+      {
+        "name": "clang-tidy",
+        "hidden": true,
+        "cacheVariables": {
+          "CMAKE_CXX_CLANG_TIDY": "clang-tidy;--header-filter=^${sourceDir}/"
+        }
+      },
+      {
+        "name": "flags-gcc-clang",
+        "hidden": true
+      },
+      {
+        "name": "dev-linux",
+        "inherits": ["dev-base"],
+        "binaryDir": "${sourceDir}/build/dev-linux",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+        }
+      },
+      {
+        "name": "python",
+        "inherits": ["release-base"],
+        "binaryDir": "${sourceDir}/build/python",
+        "cacheVariables": {
+          "molcpp_BUILD_PYTHON": "ON"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "dev-linux",
+        "configurePreset": "dev-linux",
+        "configuration": "Debug",
+        "jobs": 12
+      },
+      {
+        "name": "python",
+        "configurePreset": "python",
+        "configuration": "Release",
+        "jobs": 12
+      }
+    ]
+    ,
+    "testPresets": [
+      {
+        "name": "dev-linux",
+        "configurePreset": "dev-linux",
+        "configuration": "Debug",
+        "output": {
+          "outputOnFailure": true
+        },
+        "execution": {
+          "jobs": 12,
+          "noTestsAction": "error"
+        }
+      }
+    ]
+  }
+  

@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Prepare environment
         run: |
-          cd molpy
-          echo "Eventually do some more preparations here"
+          cd molpy/molcpp
+          cmake --preset=dev-linux
       - uses: lukka/get-cmake@latest
       - uses: lukka/run-cmake@v10.5
         with:
@@ -30,4 +30,4 @@ jobs:
       - uses: lukka/get-cmake@latest
       - run: |
           cd molpy
-          pip install 
+          pip install .

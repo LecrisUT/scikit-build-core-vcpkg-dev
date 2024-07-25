@@ -19,8 +19,6 @@ jobs:
           cmakeListsTxtPath: molpy/molcpp/CMakeLists.txt
           configurePreset: 'python'
           buildPreset: 'python'
-          workflowPreset: vcpkg
-
   python:
     runs-on: ubuntu-latest
     steps:

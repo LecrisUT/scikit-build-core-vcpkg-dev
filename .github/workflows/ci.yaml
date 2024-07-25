@@ -9,15 +9,15 @@ jobs:
   only-cmake:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Prepare environment
-        run: |
-          cd molpy/molcpp
-          cmake --preset=dev-linux
       - uses: lukka/get-cmake@latest
-      - uses: lukka/run-cmake@v10.5
+      - name: Setup anew vcpkg
+        uses: lukka/run-vcpkg@v11
+      - name: Run CMake
+        uses: lukka/run-cmake@v10.5
         with:
-          # You may need to change the path here
+          cmakeListsTxtPath: molpy/molcpp/CMakeLists.txt
+          configurePreset: 'python'
+          buildPreset: 'python'
           workflowPreset: vcpkg
 
   python:
@@ -29,5 +29,4 @@ jobs:
           python-version: 3.x
       - uses: lukka/get-cmake@latest
       - run: |
-          cd molpy
-          pip install .
+          pip install molpy

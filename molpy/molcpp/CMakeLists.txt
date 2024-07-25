@@ -10,12 +10,17 @@ project(
 
 message("Configuring molcpp/source...")
 
-file(GLOB_RECURSE MOLCPP_SRC "**.cpp")
+file(GLOB_RECURSE MOLCPP_SRC "src/*.cpp")
 add_library(
     molcpp_molcpp
     ${MOLCPP_SRC}
 )
 message("${MOLCPP_SRC}")
+target_include_directories(
+    molcpp_molcpp
+    PUBLIC
+    include
+)
 
 set_target_properties(molcpp_molcpp PROPERTIES POSITION_INDEPENDENT_CODE ON)
 

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "molcpp/export.hpp"
-#include "molcpp/types.hpp"
+#include "types.hpp"
 
 #include "xtensor-blas/xlinalg.hpp"
 #include <initializer_list>
@@ -62,7 +61,7 @@ static bool is_diagonal(const Mat3 &matrix)
     return is_tril_zero && is_triu_zero;
 }
 
-class MOLCPP_EXPORT Region
+class Region
 {
   public:
     /// Default constructor
@@ -88,7 +87,7 @@ class MOLCPP_EXPORT Region
   private:
 };
 
-class MOLCPP_EXPORT Boundary
+class Boundary
 {
   public:
     /// Default constructor
@@ -111,7 +110,7 @@ class MOLCPP_EXPORT Boundary
     virtual auto wrap(const xt::xarray<double> &) const -> xt::xarray<double> = 0;
 };
 
-class MOLCPP_EXPORT Box : public Region, public Boundary
+class Box : public Region, public Boundary
 {
   public:
     enum Style
@@ -197,7 +196,7 @@ class MOLCPP_EXPORT Box : public Region, public Boundary
     Mat3 _matrix;
 };
 
-bool MOLCPP_EXPORT operator==(const Box &rhs, const Box &lhs);
-bool MOLCPP_EXPORT operator!=(const Box &rhs, const Box &lhs);
+bool operator==(const Box &rhs, const Box &lhs);
+bool operator!=(const Box &rhs, const Box &lhs);
 
 } // namespace molcpp

@@ -28,4 +28,4 @@ jobs:
           python-version: 3.x
       - uses: lukka/get-cmake@latest
       - run: |
-          pip install molpy
+          pip install ./molpy

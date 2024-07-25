@@ -6,3 +6,7 @@ minimal reproducible environment to test orchestrate scikit-build-core with vcpk
 2. Dev containers: open folder in container
 3. cd `molpy` and `pip install -e .` expect to raise an error;
 4. cd `molpy/molcpp` and `cmake --preset=dev-linux` expect work fine
+
+## changelog
+
+add workflow

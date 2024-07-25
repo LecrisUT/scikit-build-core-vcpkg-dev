@@ -27,5 +27,7 @@ jobs:
         with:
           python-version: 3.x
       - uses: lukka/get-cmake@latest
+      - name: Setup anew vcpkg
+        uses: lukka/run-vcpkg@v11
       - run: |
           pip install ./molpy
